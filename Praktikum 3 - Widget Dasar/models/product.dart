@@ -274,10 +274,11 @@ void main() {
     ),
     Product(
       id: "L313",
-      nama: "Laptop",
+      nama: "Laptop Gaming",
       harga: 7500000.0,
       kategori: "Elektronik",
-      stok: 0,
+      stok: 13,
+      description: "Laptop performa tinggi",
     ),
     Product(
       id: "KJ04",
@@ -292,7 +293,7 @@ void main() {
       nama: "Jaket Kulit",
       harga: 250000.0,
       kategori: "Fashion",
-      stok: 9,
+      stok: 0,
     ),
     Product(
       id: "SS92",
