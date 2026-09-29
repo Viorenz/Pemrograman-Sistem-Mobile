@@ -89,6 +89,73 @@ class DiscountedProduct extends Product {
   }
 }
 
+List<Product> daftarProduk = [
+    Product(
+      id: "P003",
+      nama: "PC",
+      harga: 25000000.0,
+      kategori: "Elektronik",
+      stok: 17,
+      description: "PC gaming.",
+    ),
+    Product(
+      id: "S202",
+      nama: "Smartphone",
+      harga: 18000000.0,
+      kategori: "Elektronik",
+      stok: 5,
+    ),
+    DiscountedProduct(
+      id: "L313",
+      nama: "Laptop Gaming",
+      harga: 7500000.0,
+      kategori: "Elektronik",
+      stok: 13,
+      description: "Laptop performa tinggi",
+      discountPercent: 10,
+    ),
+    DiscountedProduct(
+      id: "KJ04",
+      nama: "Kemeja Polo",
+      harga: 85000.0,
+      kategori: "Fashion",
+      stok: 51,
+      description: "Cocok untuk cuaca panas.",
+      discountPercent: 15,
+    ),
+    DiscountedProduct(
+      id: "JK56",
+      nama: "Jaket Kulit",
+      harga: 250000.0,
+      kategori: "Fashion",
+      stok: 0,
+      discountPercent: 15,
+    ),
+    Product(
+      id: "SS92",
+      nama: "Sepatu Coklat",
+      harga: 450000.0,
+      kategori: "Fashion",
+      stok: 31,
+    ),
+    DiscountedProduct(
+      id: "KP5",
+      nama: "Kopi Dubai",
+      harga: 65000.0,
+      kategori: "Makanan",
+      stok: 11,
+      description: "Aroma kopi yang khas.",
+      discountPercent: 5,
+    ),
+    Product(
+      id: "CT9",
+      nama: "Cokelat Almond",
+      harga: 45000.0,
+      kategori: "Makanan",
+      stok: 1,
+    ),
+  ];
+
 void main() {
   const namaToko = "TokoKita";
   final waktuBuka = DateTime.now();
@@ -256,68 +323,6 @@ void main() {
 
   //List dummy dan total belanja
   print("\n=== DATA DUMMY PRODUK ===");
-  List<Product> daftarProduk = [
-    Product(
-      id: "P003",
-      nama: "PC",
-      harga: 25000000.0,
-      kategori: "Elektronik",
-      stok: 17,
-      description: "PC gaming.",
-    ),
-    Product(
-      id: "S202",
-      nama: "Smartphone",
-      harga: 18000000.0,
-      kategori: "Elektronik",
-      stok: 5,
-    ),
-    Product(
-      id: "L313",
-      nama: "Laptop Gaming",
-      harga: 7500000.0,
-      kategori: "Elektronik",
-      stok: 13,
-      description: "Laptop performa tinggi",
-    ),
-    Product(
-      id: "KJ04",
-      nama: "Kemeja Polo",
-      harga: 85000.0,
-      kategori: "Fashion",
-      stok: 51,
-      description: "Cocok untuk cuaca panas.",
-    ),
-    Product(
-      id: "JK56",
-      nama: "Jaket Kulit",
-      harga: 250000.0,
-      kategori: "Fashion",
-      stok: 0,
-    ),
-    Product(
-      id: "SS92",
-      nama: "Sepatu Coklat",
-      harga: 450000.0,
-      kategori: "Fashion",
-      stok: 31,
-    ),
-    Product(
-      id: "KP5",
-      nama: "Kopi Dubai",
-      harga: 65000.0,
-      kategori: "Makanan",
-      stok: 11,
-      description: "Aroma kopi yang khas.",
-    ),
-    Product(
-      id: "CT9",
-      nama: "Cokelat Almond",
-      harga: 45000.0,
-      kategori: "Makanan",
-      stok: 1,
-    ),
-  ];
 
   for (var p in daftarProduk) {
     p.cetakInfo();
