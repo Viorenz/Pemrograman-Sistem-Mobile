@@ -1,6 +1,10 @@
 import 'dart:ui'; 
 import 'package:flutter/material.dart';
-import 'screens/home_page.dart'; 
+import 'package:tokokita/screens/cart_page.dart';
+import 'screens/landing_page.dart';
+import 'screens/login_page.dart';
+import 'screens/main_page.dart'; 
+import 'screens/product_detail_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +28,14 @@ class MyApp extends StatelessWidget {
           PointerDeviceKind.trackpad,
         },
       ),
-      home: const HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const LandingPage(),
+        '/login':(context) => const LoginPage(),
+        '/main':(context) => const MainPage(),
+        '/detail': (context) => const ProductDetailPage(),
+        '/cart':(context) => const CartPage(),
+      },
     );
   }
 }

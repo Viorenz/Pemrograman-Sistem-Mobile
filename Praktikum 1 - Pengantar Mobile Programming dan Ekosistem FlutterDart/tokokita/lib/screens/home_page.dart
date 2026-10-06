@@ -1,57 +1,30 @@
 import 'package:flutter/material.dart';
-import '../models/product.dart';
-import '../widgets/product_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final products = [...daftarProduk, ...daftarProduk];
-
     return Scaffold(
-      backgroundColor: Colors.grey[70],
-      body: SafeArea(
+      appBar: AppBar(
+        title: const Text('Beranda TokoKita'),
+        backgroundColor: Colors.purpleAccent,
+        automaticallyImplyLeading: false,
+      ),
+      body: Center(
         child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'TokoKita',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.purpleAccent,
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        'Belanja jadi lebih mudah',
-                        style: TextStyle(fontSize: 12, color: Colors.grey),
-                      ),
-                    ],
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.shopping_cart, color: Colors.purpleAccent),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Icon(Icons.store, size: 80, color: Colors.purpleAccent),
+            SizedBox(height: 16),
+            Text(
+              'Selamat Datang di Beranda',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-
-            Expanded(
-              child: ListView.builder(
-                itemCount: daftarProduk.length,
-                itemBuilder: (context, index) {
-                  return ProductCard(product: daftarProduk[index]);
-                },
-              ),
+            SizedBox(height: 8),
+            Text(
+              'Pilih tab "Daftar Produk" di bawah untuk mulai belanja.',
+              style: TextStyle(color: Colors.grey),
             ),
           ],
         ),
