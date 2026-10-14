@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../models/product.dart';
 import '../screens/product_detail_page.dart';
 import 'price_label.dart';
@@ -36,20 +36,18 @@ class _ProductCardState extends State<ProductCard> {
 
     return InkWell(
       onTap: () async {
-        final result = await Navigator.pushNamed(
-          context,
-          '/detail',
-          arguments: widget.product,
+        final result = await Get.to(
+          () => ProductDetailPage(product: widget.product),
         );
-        if (result != null && context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                '${widget.product.nama} ($result item) berhasil ditambahkan ke keranjang!',
-              ),
-              backgroundColor: Colors.green,
-              duration: const Duration(seconds: 2),
-            ),
+
+        if (result != null) {
+          Get.snackbar(
+            'Produk Berhasil Ditambahkan',
+            '${widget.product.nama} ($result) berhasil ditambahkan ke keranjang!',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.green.shade100,
+            colorText: Colors.green.shade900,
+            duration: const Duration(seconds: 2),
           );
         }
       },

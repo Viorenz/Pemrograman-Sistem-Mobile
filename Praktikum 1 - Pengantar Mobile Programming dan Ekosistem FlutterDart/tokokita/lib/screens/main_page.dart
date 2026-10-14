@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../controllers/cart_controller.dart';
 import 'home_page.dart';
 import 'product_list_page.dart';
 import 'cart_page.dart';
@@ -12,10 +15,12 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _selectedIndex = 0;
+  final CartController cartController = Get.put(CartController());
+
+  int _selectedIndex = 1;
 
   final List<Widget> _pages = const [
-    HomePage(),       
+    HomePage(),
     ProductListPage(),
     ProfilePage(),
   ];
@@ -36,7 +41,7 @@ class _MainPageState extends State<MainPage> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home), 
             label: 'Home',
           ),
           BottomNavigationBarItem(
@@ -44,7 +49,7 @@ class _MainPageState extends State<MainPage> {
             label: 'Daftar Produk',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person), 
             label: 'Profile',
           ),
         ],

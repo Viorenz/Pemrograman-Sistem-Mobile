@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../controllers/cart_controller.dart';
 import '../models/product.dart';
 
 class ProductDetailPage extends StatefulWidget {
@@ -11,6 +14,8 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
+  final CartController cartController = Get.find<CartController>();
+
   int jumlah = 1;
 
   @override
@@ -25,9 +30,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           title: const Text('Detail Produk'),
           backgroundColor: Colors.purpleAccent,
         ),
-        body: const Center(
-          child: Text('Data produk tidak ditemukan.'),
-        ),
+        body: const Center(child: Text('Data produk tidak ditemukan.')),
       );
     }
 
@@ -35,6 +38,42 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       appBar: AppBar(
         title: Text(selectedProduct.nama),
         backgroundColor: Colors.purpleAccent,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.toNamed('/cart');
+            },
+            icon: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                const Icon(Icons.shopping_cart),
+                Positioned(
+                  right: -4,
+                  top: -4,
+                  child: Obx(
+                    () => cartController.totalItem > 0
+                        ? Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Text(
+                              '${cartController.totalItem}',
+                              style: const TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        : const SizedBox(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -60,10 +99,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
             Text(
               selectedProduct.nama,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
 
@@ -102,7 +138,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             ),
             const SizedBox(height: 6),
             Text(
-              selectedProduct.description ?? 'Tidak ada deskripsi untuk produk ini.',
+              selectedProduct.description ??
+                  'Tidak ada deskripsi untuk produk ini.',
               style: const TextStyle(fontSize: 14, color: Colors.black87),
             ),
             const SizedBox(height: 24),
@@ -166,10 +203,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 ),
                 onPressed: selectedProduct.stok > 0
                     ? () {
-                        Navigator.pop(
-                          context,
-                          '$jumlah item ${selectedProduct.nama} berhasil ditambahkan ke keranjang!',
-                        );
+                        for (int i = 0; i < jumlah; i++) {
+                          cartController.addToCart(selectedProduct);
+                        }
                       }
                     : null,
                 icon: const Icon(Icons.shopping_cart, color: Colors.white),

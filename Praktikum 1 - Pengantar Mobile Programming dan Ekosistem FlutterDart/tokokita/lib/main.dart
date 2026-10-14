@@ -1,9 +1,12 @@
-import 'dart:ui'; 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tokokita/screens/cart_page.dart';
+
 import 'screens/landing_page.dart';
 import 'screens/login_page.dart';
-import 'screens/main_page.dart'; 
+import 'screens/main_page.dart';
 import 'screens/product_detail_page.dart';
 
 void main() {
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TokoKita',
       theme: ThemeData(
@@ -31,10 +34,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const LandingPage(),
-        '/login':(context) => const LoginPage(),
-        '/main':(context) => const MainPage(),
+        '/login': (context) => const LoginPage(),
+        '/main': (context) => const MainPage(),
         '/detail': (context) => const ProductDetailPage(),
-        '/cart':(context) => const CartPage(),
+        '/cart': (context) => const CartPage(),
       },
     );
   }
