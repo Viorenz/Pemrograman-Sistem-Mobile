@@ -26,13 +26,13 @@ double hitungTotalBelanja(List<Product> keranjang) {
 
 //Deklarasi class buat langkah 5//
 class Product {
-  String id;
-  String nama;
-  double harga;
-  String kategori;
+  final String id;
+  final String nama;
+  final double harga;
+  final String kategori;
   int stok;
-
   String? description;
+  final String gambar;
 
   Product({
     required this.id,
@@ -41,7 +41,20 @@ class Product {
     required this.kategori,
     required this.stok,
     this.description,
+    this.gambar = '',
   });
+
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+      id: json['id'].toString(),
+      nama: json['title'],
+      harga: (json['price'] as num).toDouble(),
+      kategori: json['category'] ?? '',
+      stok: 10,
+      description: json['description'] ?? '',
+      gambar: json['image'] ?? '',
+    );
+  }
 
   String getStatusStok() {
     if (stok > 5) {
@@ -74,6 +87,7 @@ class DiscountedProduct extends Product {
     required String kategori,
     required int stok,
     String? description,
+    String gambar = '',
     required this.discountPercent,
   }) : super(
          id: id,
@@ -82,6 +96,7 @@ class DiscountedProduct extends Product {
          kategori: kategori,
          stok: stok,
          description: description,
+         gambar: gambar,
        ); // super() memanggil constructor dari class induk (Product)
 
   double hitungHargaFinal() {
@@ -90,71 +105,71 @@ class DiscountedProduct extends Product {
 }
 
 List<Product> daftarProduk = [
-    Product(
-      id: "P003",
-      nama: "PC",
-      harga: 25000000.0,
-      kategori: "Elektronik",
-      stok: 17,
-      description: "PC gaming.",
-    ),
-    Product(
-      id: "S202",
-      nama: "Smartphone",
-      harga: 18000000.0,
-      kategori: "Elektronik",
-      stok: 5,
-    ),
-    DiscountedProduct(
-      id: "L313",
-      nama: "Laptop Gaming",
-      harga: 7500000.0,
-      kategori: "Elektronik",
-      stok: 13,
-      description: "Laptop performa tinggi",
-      discountPercent: 10,
-    ),
-    DiscountedProduct(
-      id: "KJ04",
-      nama: "Kemeja Polo",
-      harga: 85000.0,
-      kategori: "Fashion",
-      stok: 51,
-      description: "Cocok untuk cuaca panas.",
-      discountPercent: 15,
-    ),
-    DiscountedProduct(
-      id: "JK56",
-      nama: "Jaket Kulit",
-      harga: 250000.0,
-      kategori: "Fashion",
-      stok: 0,
-      discountPercent: 15,
-    ),
-    Product(
-      id: "SS92",
-      nama: "Sepatu Coklat",
-      harga: 450000.0,
-      kategori: "Fashion",
-      stok: 31,
-    ),
-    DiscountedProduct(
-      id: "KP5",
-      nama: "Kopi Dubai",
-      harga: 65000.0,
-      kategori: "Makanan",
-      stok: 11,
-      description: "Aroma kopi yang khas.",
-      discountPercent: 5,
-    ),
-    Product(
-      id: "CT9",
-      nama: "Cokelat Almond",
-      harga: 45000.0,
-      kategori: "Makanan",
-      stok: 1,
-    ),
-  ];
+  Product(
+    id: "P003",
+    nama: "PC",
+    harga: 25000000.0,
+    kategori: "Elektronik",
+    stok: 17,
+    description: "PC gaming.",
+  ),
+  Product(
+    id: "S202",
+    nama: "Smartphone",
+    harga: 18000000.0,
+    kategori: "Elektronik",
+    stok: 5,
+  ),
+  DiscountedProduct(
+    id: "L313",
+    nama: "Laptop Gaming",
+    harga: 7500000.0,
+    kategori: "Elektronik",
+    stok: 13,
+    description: "Laptop performa tinggi",
+    discountPercent: 10,
+  ),
+  DiscountedProduct(
+    id: "KJ04",
+    nama: "Kemeja Polo",
+    harga: 85000.0,
+    kategori: "Fashion",
+    stok: 51,
+    description: "Cocok untuk cuaca panas.",
+    discountPercent: 15,
+  ),
+  DiscountedProduct(
+    id: "JK56",
+    nama: "Jaket Kulit",
+    harga: 250000.0,
+    kategori: "Fashion",
+    stok: 0,
+    discountPercent: 15,
+  ),
+  Product(
+    id: "SS92",
+    nama: "Sepatu Coklat",
+    harga: 450000.0,
+    kategori: "Fashion",
+    stok: 31,
+  ),
+  DiscountedProduct(
+    id: "KP5",
+    nama: "Kopi Dubai",
+    harga: 65000.0,
+    kategori: "Makanan",
+    stok: 11,
+    description: "Aroma kopi yang khas.",
+    discountPercent: 5,
+  ),
+  Product(
+    id: "CT9",
+    nama: "Cokelat Almond",
+    harga: 45000.0,
+    kategori: "Makanan",
+    stok: 1,
+  ),
+];
 
 void main() {
   const namaToko = "TokoKita";
