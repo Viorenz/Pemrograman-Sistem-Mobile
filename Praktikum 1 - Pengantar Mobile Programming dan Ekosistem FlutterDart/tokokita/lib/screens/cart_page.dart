@@ -190,7 +190,8 @@ class CartPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
+                          await cartController.checkout();
                           Get.off(() => const CheckoutPage());
                         },
                         child: const Text(

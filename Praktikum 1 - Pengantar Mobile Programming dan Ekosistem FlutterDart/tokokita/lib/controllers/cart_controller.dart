@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../models/product.dart';
+import '../services/order_database.dart';
+import '../services/order_database.dart';
+import '../screens/order_history_page.dart';
 
 class CartItemModel {
   Product product;
@@ -75,5 +78,53 @@ class CartController extends GetxController {
 
   double get totalHarga {
     return cartItems.fold(0.0, (sum, item) => sum + item.subtotal);
+  }
+
+  Future<void> checkout() async {
+    if (cartItems.isEmpty) {
+      Get.snackbar(
+        'Keranjang Kosong',
+        'Tambahkan Produk Terlebih Dahulu Sebelum Checkout!',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+
+    String daftarItemStr = cartItems
+        .map((item) => '${item.product.nama} (${item.quantity}x)')
+        .join(', ');
+
+    Map<String, dynamic> orderData = {
+      'tanggal': DateTime.now().toString().split('.').first,
+      'daftarItem': daftarItemStr,
+      'totalHarga': totalHarga,
+      'status': 'Diproses',
+    };
+
+    try {
+      await OrderDatabase.instance.insertOrder(orderData);
+
+      cartItems.clear();
+
+      Get.snackbar(
+        'Checkout Berhasil',
+        'Pesanan Anda Sudah Disimpan ke Riwayat Pesanan',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green.shade100,
+        colorText: Colors.green.shade900,
+        duration: const Duration(seconds: 2),
+      );
+
+      Get.off(() => const OrderHistoryPage());
+      
+    } catch (e) {
+      Get.snackbar(
+        'Checkout Gagal',
+        'Terjadi Kesalahan: $e',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.shade100,
+        colorText: Colors.red.shade900,
+      );
+    }
   }
 }
